@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Frases para Meu Amor</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to top, #1a1a40, #4b006e);
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    #phrase {
+      font-size: 1.6rem;
+      max-width: 800px;
+      margin-bottom: 30px;
+      color: #ffb6c1;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #ff1493;
+    }
+
+    .stars, .hearts {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .star, .heart {
+      position: absolute;
+      animation: float 10s linear infinite;
+      opacity: 0.7;
+    }
+
+    .star {
+      width: 4px;
+      height: 4px;
+      background: white;
+      border-radius: 50%;
+    }
+
+    .heart {
+      width: 20px;
+      height: 20px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/3/35/Emoji_u2764.svg') no-repeat center;
+      background-size: cover;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh); }
+      100% { transform: translateY(-10vh); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="stars"></div>
+  <div class="hearts"></div>
+
+  <div class="container">
+    <h1>Uma frase por dia, só pra você 💌</h1>
+    <div id="phrase">Clique no botão para começar!</div>
+    <button onclick="nextPhrase()">Próxima frase</button>
+  </div>
+
+  <script>
+    const phrases = [
+  "1. Eu amo tudo que te representa.",
+      "2. Com você eu me sinto segura.",
+      "3. Você é tudo pra mim.",
+      "4. Meu mundo ganha cor quando estou com você.",
+      "5. Com você, tudo faz sentido.",
+      "6. você é a razão da minha vida.",
+      "7. Você é tudo que quero.",
+      "8. Você é minha paz em meio ao caos.",
+      "9. Nada é mais doce do que o som da sua voz.",
+      "10. Você é o tempero do meu miojo.",
+      "11. Você é a melhor pessoa que entrou na minha vida.",
+      "12. Seu sorriso ilumina até os meus dias mais nublados.",
+      "13. Meu dia melhora só por estar com você.",
+      "14. você é perfeito.",
+      "15. Viver com você é meu unico objetivo.",
+      "16. Você é como oxigenio, não posso viver sem.",
+      "17. Quero ter um futuro ao seu lado.",
+      "18. Vamos viver juntinhos com 4 gatos.",
+      "19. Você é a mais brilhante das estrelas do céu.",
+      "20. Você é meu universo.",
+      "21. Com você ao meu lado eu quero viver.",
+      "22. Não consigo te esquecer.",
+      "23. Eu sou apaixonada por você.",
+      "24. Você é doce como chocolate.",
+      "25. Você é relaxante como a chuva.",
+      "26. Seu nome é o verdadeiro significado de amor.",
+      "27. Você é meu favorito.",
+      "28. A melhor coisa é poder gastar tempo com você.",
+      "29. Eu nao vejo o dia da gente se ver.",
+      "30. Quero passar minha vida ao seu lado.",
+      "31. Gosto de te fazer sorrir.",
+      "32. Um dia quero poder segurar sua mão.",
+      "33. Seu bem estar é a coisa mais importante.",
+      "34. Um dia quero te encher de beijinhos.",
+      "35. Quero poder te abracar, e te confortar sempre que precisar.",
+      "36. Eu me derreto do tanto que eu amo você.",
+      "37. Você é o motivo de eu acordar com um sorriso no rosto.",
+      "38. Você me faz rir, mesmo quando estou com vontade de chorar.",
+      "39. Você me entende, mesmo quando estou sendo irracional.",
+      "40. Você me aceita como sou.",
+      "41. Eu sempre sonho com você.",
+      "42. A vida é mais alegre ao seu lado.",
+      "43. Quero um dia sempre estar conectada a você.",
+      "44. Você respeita os meus limites.",
+      "45. Você me mostrou o seu coração.",
+      "46. Você coloca tudo em perspectiva.",
+      "47. Você é o rei do meu mundo.",
+      "48. As vezes se torna impossivel não pensar em você.",
+      "49. Você transformou a minha vida em um conto de fadas.",
+      "50. Eu gosto de agradar você.",
+      "51. Um dia quero passar horas abraçando você.",
+      "52. Você transforma a minha vida em uma aventura mágica.",
+      "53. Você me faz sentir como a única pessoa deste mundo.",
+      "54. Um dia vamos maratonar nossos filmes favoritos juntos.",
+      "55. Você é o meu universo particular.",
+      "56. Cada sonho meu é um sonho com você.",
+      "57. Meus momentos com você é minha aula favorita.",
+      "58. Você é a primeira pessoa que me vem à mente quando acordo.",
+      "59. A palavra beleza tem o significado do seu rosto.",
+      "60. Seu sorriso ilumina os meus dias mais sombrios.",
+      "61. As suas palavras são a minha luz.",
+      "62. Eu poderia passar horss fazendo carinho em você.",
+      "63. Você é o meu maior orgulho.",
+      "64. Em você encontro a paz.",
+      "65. Eu me apaixonei, no momento em que te vi.",
+      "66. Você é o melhor presente que alguem como eu poderia receber.",
+      "67. Estando com você até a pior tempestada passa.",
+      "68. Um dia quando eu poder tocar em você,será meu maior privilegio",
+      "69. Sua bondade me inspira.",
+      "70. Amo meus momentos com você.",
+      "71. Você é o meu dia e minha noite.",
+      "72. Você me acalma sempre quando estou surtando.",
+      "73. Você sabe exatamente do que eu gosto.",
+      "74. Um dia quero dormir com você, e te abraçar como se fosse um bichimho de pelucia.",
+      "75. Você torna todos os meus dias inesqueciveis.",
+      "76. Você dá esperança para minha vida.",
+      "77. Você me dá coragem para cometer riscos.",
+      "78. Você alegra todos os meus dias.",
+      "79. Amo pensar que o futuro nos aguarda.",
+      "80. Eu amo gatinhos, assim como você.",
+      "81. Você aquece meu coração, apenas com a sua presença.",
+      "82. Você é o unico que me atura.",
+      "83. Gostaria de acordar sempre ao seu lado.",
+      "84. Você é a ultima pessoa que penso antes de dormir, e a primeira pessoa que penso ao acordar.",
+      "85. Você sempre me deixa pra cima.",
+      "86. Amo cada minuto ao seu lado.",
+      "87. Amo suas manias.",
+      "88. Ao seu lado eu sei o que é ser feliz.",
+      "89. Você me dá os melhores conselhos.",
+      "90. Eu quero ser apenas sua pelo resto da minha vida.",
+      "91. Com você, me sinto completa.",
+      "92. Amo terminar meu dia ao seu lado.",
+      "93. Você aquece meu coração até nos dias mais frios.",
+      "95. Você é o meu sorvete nos dias mais quentes do verão.",
+      "96. Você é a pessoa que sempre sonhei ter ao meu lado.",
+      "97. Você é uma paixão que arde em meu peito.",
+      "98. Você segue ao meu lado, mesmo quando um temporal passa pela minha vida.",
+      "99. Sinto que consigo vencer qualquer batalha ao seu lado.",
+      "100. Nossa jornada de vida é sempre uma grande aventura.",
+      "101. Você mudou a minha vida para melhor.",
+      "102. Você me fez uma pessoa melhor.",
+      "103. Se eu pudesse colocaria o mundo inteiro aos seus pés.",
+      "104. Você me faz encarar a vida com mais otimismo.",
+      "105. Você cruzou o meu caminho quando eu mais precisava.",
+      "106. Você é a minha maior certeza na vida.",
+      "107. Você me garante segurança, respeito e confiança.",
+      "108. Você é a mais linda dedicatória de amor que a vida me deu.",
+      "109. Dentro de mim, um universo inteiro se expande por causa do seu amor.",
+      "110. Apesar de todas nossas diferenças, eu continuo te amando igual.",
+      "111. Você é a razão de cada segundo da minha felicidade.",
+      "112. O cupido disparou uma flecha em mim, agora estou apaixonado por ti.",
+      "113. Você é o melhor presente que alguem poderia receber.",
+      "114. Você é o mais precioso tesouro da minha vida.",
+      "115. Meu coração não pertence mais a mim, e sim a você.",
+      "116. Você é um anjo que protege a minha vida de qualquer mal.",
+      "117. Toda vez que você fala que me ama, meu coração erra uma batida.",
+      "118. Você é o Jack e eu a Rose, mas diferente dela, eu morreria no mar para você viver.",
+      "119. Sua palavras tocam profundamente a minha alma.",
+      "120. Você curou todas as feridas do meu coração.",
+      "121. Você é o meu super-herói.",
+      "122. Enquanto você estiver ao meu lado, eu sei que meu mundo será perfeito.",
+      "123. O seu amor floresce o meu coração com as mais belas margaridas.",
+      "124. Ao seu lado eu me sinto apreciado.",
+      "125. Seus elogios sempre melhoram meu dia.",
+      "126. Com você não sinto duvidas que sou amado.",
+      "127. Você faz com que eu vá dormir com um sorriso estampado no rosto todos os dias.",
+      "128. Com você eu posso ser eu mesma, e comigo voce pode ser você mesmo.",
+      "129. Você entende e respeita os meus defeitos.",
+      "130. 1 minuto sem você é o suficiente pra me fazer sentir saudades.",
+      "131. Meu coração acelera de tanto amor que você me dá.",
+      "132. Mudam as estações e o meu amor por você só cresce.",
+      "133. A sua felicidade é a minha também.",
+      "134. Minha vida se resume em todos os momentos ao seu lado.",
+      "135. Nosso amor não é perfeito, mas com certeza é verdadeiro.",
+      "136. Você é doce como mel.",
+      "137. Você representa as melhores notas de uma música.",
+      "138. Seus detalhes são perfeitos.",
+      "139. Sua voz faz meu coração vibrar de emoção.",
+      "140. Você me salvou de inúmeras maneiras.",
+      "141. Meu coração é inteiramente seu.",
+      "142. Uma vez desejei o amor quando vi uma estrela cadente, e então você entrou na minha vida.",
+      "143. Cada memoria que estamos juntos, consegue ser melhor que meu doce favorito.",
+      "144. Você é perfeito como a nona sinfonia de beethoven.",
+      "145. Seu amor é o equilibrio perfeito.",
+      "146. Você faz da minha vida um lugar bem melhor para se viver.",
+      "147. Saber que você existe me motiva a acordar todas as manhãs.",
+      "149. Você me faz sentir mais especial, apenas estando ao seu lado.",
+      "150. Você é meu miojo favorito, meu chocolate favorito, você é a junção de todos os meus favoritos.",
+      "151. Sempre sonhei em encontrar alguém especial na minha vida, mas você superou qualquer expectativa.",
+      "152. Seu jeito me hipnotiza.",
+      "153. Você é mais belo que um pôr-do-sol em Noronha.",
+      "154. Eu amo compartilhar tudo com você.",
+       "155. Eu amo rir de todas as suas piadas, até das sem graça.",
+      "156. Ao seu lado, cada momento é único.",
+      "157. As vezes você até pode me tirar do serio, mas não é por isso que vou deixar de te amar.",
+      "158. Te fazer rir é a coisa que mais gosto.",
+      "159. A coisa que mais amo é estar com você.",
+      "160. Você é a inspiração que move as minhas manhãs.",
+      "161. De todas as pessoas incríveis desse mundo, eu tive sorte de encontrar a melhor de todas.",
+      "162. Sua beleza é maior do que a de qualquer margarida.",
+      "163. Tenho paixão por tudo o que você faz, pela forma como você enxerga o mundo, pelo seu jeito único de existir.",
+      "164. Você me surpreende todos os dias com o seu amor.",
+      "165. Você foi a melhor coisa que já me aconteceu.",
+      "166. Te abraçar deve ser a melhor coisa do mundo.",
+      "167. Você deve cheirar tão bem quanto uma margarida.",
+      "168. A cada dia que passa, tenho mais certeza da pessoa extraordinária que você é.",
+      "169. Eu me apaixonei no momento que vi o seu sorriso pela primeira vez.",
+      "170. Eu passaria horas apreciando a imensidão do seu olhar.",
+      "171. Você é diferente de tudo o que eu já vi e vivi.",
+      "172. Você me mostrou o que é o amor e a liberdade.",
+      "173. Você torna o impossivel possivel, apenas com o seu amor.",
+      "174. Você é o meu amuleto da sorte.",
+      "175. Qualquer conversa de qualquer tema, sempre se torna melhor quando é com você.",
+      "176. De todas as obras da natureza, você sem duvidas é a mais bonita.",
+      "177. Meu mundo se acalma, só por você estar na minha rotina.",
+      "178. Sua voz é como musica aos meus ouvidos.",
+      "179. Eu adoro você exatamente do jeitinho que você é.",
+      "180. Você é a pessoa que eu esperei por toda a minha vida.",
+      "181. A sua alegria é contagiante.",
+      "182. Você é a minha alma gêmea.",
+      "183. A sua inteligência e determinação me inspiram todos os dias.",
+      "184. Você é tão perfeito que as vezes nem parece real.",
+      "185. Cada segundo ao seu lado é de extrema importancia para mim",
+      "186. Você é a mais perfeita poesia.",
+      "187. O destino é a única explicação para eu ter te encontrado.",
+      "188. Precisaria de uma vida inteira para descobrir cada pedacinho seu. Mas não se engane. Eu amo cada um deles.",
+      "189. Seu amor aconchega a minha alma.",
+      "190. Somos a dupla perfeita, mesmo sendo problematicos.",
+      "191. Seu amor é o que sempre idealizei.",
+      "192. Eu não me arrependo de ter te escolhido como meu.",
+      "193. Você torna os meus sonhos possíveis de serem atingidos.",
+      "194. Você é a luz que ilumina o meu caminho.",
+      "195. Eu sempre te amei, até mesmo antes de te conhecer.",
+      "196. Se Deus existisse, ficaria incredulo do quão perfeito somos juntos.",
+      "197. Com você até o silêncio fica melhor.",
+      "198. Todos os dias você me tira bons sorrisos bobos.",
+      "199. Nunca vou me cansar de você e do seu jeitinho unico.",
+      "200. Vamos criar nosso proprio Romeu e Julieta, só que dessa vez vamos derrotar todos que se oporem a nós.",
+      "201. Você é o significado da minha existencia.",
+      "202. Você é meu mundo, minha galáxia, meu universo.",
+      "203. Quando penso em você, tenho certeza que é a pessoa certa.",
+      "204. Eu não duvido que nosso amor seja reciproco.",
+      "205. Te encontrar me mostrou que sempre busquei nos lugares errados a definição de amor.",
+      "206. Você é meu maior vicio.",
+      "207. Ao seu lado sei que fadas podem ser reais, viver com você é como estar em um.",
+      "208. Com você, há sol todos os dias na minha vida.",
+      "209. Você trouxe uma nova cor para a minha vida.",
+      "210. Você e a felicidade residem no mesmo lugar dentro do meu coração, afinal você é minha felicidade.",
+      "211. Eu me sinto em casa quando estou com você.",
+      "212. Você era o equilíbrio que faltava para a minha vida.",
+      "213. O vazio que sentia dentro de mim desapareceu quando você apareceu na minha vida.",
+      "214. Depois de tantos erros, finalmente acertei quando achei você.",
+      "215. Encontrei em você a chave da minha felicidade.",
+        "216. Todas as pessoas que passaram por mim foram um ensaio para viver esse amor com você.",
+      "217. Meu coração só bate mais forte quando estou com você.",
+      "218. Amor e Carinho: duas palavras que ganharam sentido na minha vida depois de te conhecer.",
+      "219. Cada detalhe seu está bem guardado no meu coração.",
+      "220. Com você do meu lado, não há temporal que eu não consiga enfrentar.",
+      "221. Você é tudo que faltava na minha vida.",
+      "222. Há apenas dois momentos que quero estar com você: agora e sempre.",
+      "223. Quando menos percebi, seu nome estava na minha mente, boca, palavras e coração.",
+      "224. Meu corpo e minha alma são apenas seu, para sempre.",
+      "225. Eu não só te amo por quem você é, mas por causa de quem eu me torno quando estou com você.",
+      "226. As vezes parece magica, pois sempre acordo pensando em você.",
+      "227. Você faz os meus problemas viajarem para bem longe de mim.",
+      "228. Só de pensar em você, sei que toda dor que resisti valeu a pena.",
+      "229. Nossa conexão é tão forte que a cada dia eu tenho mais certeza de que amor não se conquista, simplesmente acontece.",
+      "230. O meu coração só bate quando estou com você.",
+      "231. Quando te conheci, ganhei uma nova vida e a minha estrada se encheu de margaridas que enfeitam o meu caminho.",
+      "232. Até hoje me pergunto se você saiu dos meus sonhos.",
+      "233. Os laços que nos unem são muito mais fortes do que os que nos separam.",
+      "234. No momento em que te vi tive certeza que meus olhos jamais desejariam ficar longe dos seus.",
+      "235. Ser o meu porto seguro é apenas uma das funções que você executa com excelência.",
+      "236. A vida fica melhor quando sorrio com você.",
+      "237. Assim como as estrelas, eu e você nascemos para brilhar juntos.",
+      "238. Seus sorrisos e gentilezas foram capazes de transformar o meu mundo.",
+      "239. Você adoça a minha vida, especialmente, na minha rotina muitas vezes amarga.",
+      "240. Eu não tenho sorte, eu tenho você.",
+      "241. Você faz da minha vida um arco íris quando estou ao seu lado.",
+      "242. Tenho sorte de ter encontrado no meu melhor amigo a minha cara metade.",
+      "243. Meu amor por você é imutavel.",
+      "244. Com você, ando com um sorriso largo nesta complicada vida de erros.",
+      "245. Sempre vou acordar tranquila enquanto tiver você mesmo que nos meus pensamentos.",
+      "246. O meu amor por você não tem preço.",
+      "247. Você é o unico que eu consigo me entregar de corpo e alma.",
+      "248. Com você aprendi a cultivar amor e paz.",
+      "249. Ao seu lado me sinto completamente liberta do extresse do dia.",
+      "250. Acreditei nos meus sonhos e logo em seguida encontrei você.",
+      "251. Com você até perco a noção do tempo.",
+      "252. Você nunca julgou o meu passado, fazendo do meu futuro um lar de esperanças.",
+      "253. Você foi uma tempestade de margaridas que veio do céu para perfumar a minha vida.",
+      "254. Você é o motivo de todos os meus sorissos bobos.",
+      "255. Me apaixonei por uma pessoa de alma e coração atraente.",
+      "256. A luz que você emana me contagia.",
+      "257. Eu carrego o seu amor para todo canto que vou.",
+      "258. Você é a minha obra de arte preferida.",
+      "259. Você tem a magia de transformar minhas dores em flores.",
+      "260. Eu sempre choro de gratidão por ter você sempre comigo.",
+      "261. Seu carinho me inunda de alegria.",
+      "262. O meu presente mais precioso é sempre o sorriso que você pode me dar.",
+      "263. Você vira o meu mundo de cabeça pra baixo.",
+      "264. A maioria das coisas são melhores em sonhos, você é uma exceção a esta regra.",
+      "265. Se realmente existe um Deus, você vale bem mais do que a benção dele.",
+      "266. Meu destino agora é sempre estar ao seu lado.",
+      "267. Você é o motivo do meu bom humor e gentileza.",
+      "268. Juntos somos mais fofos que qualquer protagonista de filme de romance.",
+      "269. Quero passar minha vida ao seu lado, mesmo que isso signifique viver intensamente.",
+      "270. So de pensar em você, os meus dias se tornam menos estressantes.",
+      "271. Juntos vamos conquistar todos os nossos sonhos.",
+      "272. A cada segundo que passa eu noto o quanto que amadureci com você.",
+      "273. Você é o mais belo anjo dos céus.",
+      "274. Ao seu lado não desisto de acreditar.",
+      "275. Com você sempre dou um sorriso a cada manhã e um agradecimento ao final do dia por te ter nainha vida.",
+      "276. Em você encontro forças todos os dias.",
+      "277. O mundo seria melhor se existissem mais pessoas como você.",
+      "278. Você me ensinou que excelência não é questão de habilidade, mas sim de atitude.",
+      "279. Você me faz acreditar que sou o suficiente.",
+      "280. A vida pode nos trazer pessoas lindas, mas basta uma pessoa para que a nossa vida seja realmente bonita, e essa pessoa é você na minha vida.",
+      "281. Deixei cair uma lágrima no oceano. O dia que eu encontrá-la, será o dia que eu deixarei de te amar.",
+      "282. Meu amor por você é como um espelho. Você pode quebrá-lo em um milhão de pedaços, mas se olhar de perto, ainda verei o seu reflexo.",
+      "283. Estou transformando meus medos em esperança e meus erros em lições de vida. O motivo? Você!",
+      "284. Sei que o nosso amor é verdadeiro, pois ele sempre encontra o caminho de casa.",
+      "285. Se um abraço pudesse te dizer o quanto eu te amo, eu morreria nos seus braços.",
+      "286. Você me faz arder de paixão como o sol.",
+      "287. Nós dois somos feitos de instantes. Infinitos e lindos!",
+      "288. A minha música preferida se torna ainda mais bonita quando penso em você.",
+      "289. Nosso amor é composto por uma alma habitando dois corpos.",
+      "290. Apenas imaginar seus lindos olhos me faz viajar para putra realidade.",
+      "291. A cada ‘eu te amo’ seu causa uma alegria enorme em meu peito.",
+      "292. Eu me encantei pela sua existência.",
+      "293. Nada é tão doce, quanto as suas declarações.",
+      "294. Se beleza fosse crime, você deveria ser preso hoje mesmo.",
+      "295. Te amo porque você está sempre perto da minha alma, não necessariamente do meu corpo.",
+      "296. Você me faz transbordar de gratidão.",
+      "297. Meu coração está sempre na contramão por você.",
+      "298. Me fortaleço em você, pois você nunca vai me abandonar, assim como nunca vou te abandonar.",
+      "299. Ao seu lado, nenhum dia é igual ao outro.",
+      "300. Ninguém no mundo poderia me fazer tão feliz quanto você.",
+      "301. Você me ensinou a ver o mundo de uma maneira diferente.",
+      "302. Até mau humorado vocêé fofo.",
+      "303. Ao seu lado, passo os melhores instantes da minha vida.",
+      "304. Sempre aprendo algo de novo contigo.",
+      "305. Posso passar 24 horas ao seu lado e nunca me aborrecer.",
+      "306. Você me motiva a dar o melhor de mim em qualquer situação.",
+      "307. Você é obstinado, mas nunca arrogante.",
+      "308. Você é a minha pelucia favorita.",
+      "309. Você alegra os meus dias apenas com a sua presença.",
+      "310. Você é o tempero da minha vida.",
+      "311. Eu me apaixonei por você, ao inves de me apaixonar pela vida.",
+      "312. Um beijinho seu compensa mais que 1 milhão de abraços falsos.",
+      "313. Você me entende até mesmo quando estou de saco cheio da vida.",
+      "314. Você colore a minha vida com sua existencia.",
+      "315. Eu acho fofo quando você se preocupa comigo.",
+      "316. Eu me apaixonei até mesmo pelo minimo detalhe seu.",
+      "317. Eu me lembrarei de cada frase maravilhosa que uma vez já me falou.",
+      "318. Eu me apaixonei pela forma que me diz 'te amo'.",
+      "319. Assim como me apoia, eu sempre vou te apoiar tambem.",
+      "320. Você é a cura para todos os meus problemas.",
+      "321. Somos muito diferentes, mas como diz um velho ditado, os opostos se atraem.",
+      "322. Te garanto que não só fui o primeiro a me apaixonar, como o que mais caiu profundamente nessa sensacão.",
+      "323. Eu amo saber que confia em mim a ponto de confiar seu coração comigo.",
+      "324. A sua história de vida me inspira a melhorar, e te fazer feliz.",
+      "325. A sua determinação me dá forças.",
+      "326. Eu amo como você faz de tudo para que eu me sinta confortável, e luto para fazer você tambem se sentir confortavel.",
+      "327. Eu te amo tanto que não dá para explicar em palavras.",
+      "328. Não tenho olhos para mais ninguém que não seja você.",
+      "329. Assim como meu amor, eu sei o quanto o seu é puro.",
+      "330. O seu perdão é a como uma benção divina, poucos merecem sua compaixão.",
+      "331. Você aceita a minha raiva e a minha tristeza e consegue viver em harmonia com estes sentimentos que às vezes me tomam, por isso eu te amo.",
+      "332. Você nunca fez joguinhos com o meu coração.",
+      "333. Você sempre ouve quando sabe que estou certa.",
+      "334. Um dia vamos ter uma familia, 4 gatos eu e você contra o mundo.",
+      "335. Seus olhos são as pedras preciosas mais lindas deste mundo.",
+      "336. Você passa um ar inocente e acolhedor que conforta a minha alma.",
+      "337. Eu me sinto especial por você consegue compartilhar suas tristezas e inseguranças comigo.",
+      "338. Pode não ser forte fisicamente, mas para me atursr por muito tempo, com certeza é emocionalmente,eu aprecio isso em você.",
+      "339. Você me conquista todos os dias.",
+      "340. Você me passa uma energia tão boa que me sinto segura.",
+      "341. Nem o horoscopo consegue definir o motivo de nos darmos tão bem.",
+      "342. As suas histórias me divertem e me inspiram.",
+      "343. Eu amo o quanto você sabe tanto sobre o mundo e mesmo assim você exala humildade para compartilhar os seus conhecimentos.",
+      "344. Você sempre compartilha a sua força comigo quando mais preciso, obrigado por estar comigo.",
+      "345. Você é capaz de absorver e compartilhar a confiança que tenho em mim.",
+      "346. Você me ensinou a amar incondicionalmente.",
+      "347. Você acredita em mim, assim como acredito em você.",
+      "348. A forma como compartilha sua vida comigo, me faz ter certeza que me ama.",
+      "346. Um dia ainda vou te aquecer com um abraço em dias frios.",
+      "350. Você é uma pessoa de confiança para mim e para todas as pessoas que te cercam.",
+      "351. Você me acolhe mesmo quando não preciso, eu amo como se dedica por mim.",
+      "352. Um dia iremos cozinhar juntos nossos pratos favoritos.",
+      "353. Saber que acredita em um futuro comigo, faz os meus dias melhores.",
+      "354. Você me encoraja a ir atrás dos meus sonhos todos os dias.",
+      "355. Você está sempre pronto para cuidar das feridas do meu coração, obrigado por cuidar de mim.",
+      "356. Você emana amor e gentileza.",
+      "357. Seu coração é doce como o de uma criança e sua mente madura como a de um sábio.",
+      "358. Não tenho medo de cair,pois sei que estará lá para me levantar.",
+      "359. Sua companhia faz todos se sentirem confortáveis.",
+      "360. Você doa o seu tempo para todos aqueles que você se importa.",
+      "361. Sua beleza me cativa.",
+      "362. Você sempre consegue me seduzir com pouco.",
+      "363. Sempre sinto borboletas no estômago quando falo com você.",
+      "364. Você consegue ser fofo e rabugento ao mesmo tempo.",
+      "365. Eu te amo e sempre te amarei por todos os dias do ano.",
+      "366. Eu te amo, e sempre te amarei como se fosse a primeira vez.",
+    ];
+
+    let index = 0;
+
+    function nextPhrase() {
+      const phraseDiv = document.getElementById('phrase');
+      phraseDiv.textContent = phrases[index];
+      index = (index + 1) % phrases.length;
+    }
+
+    // Gera estrelas e corações aleatórios no fundo
+    const stars = document.querySelector('.stars');
+    const hearts = document.querySelector('.hearts');
+
+    for (let i = 0; i < 60; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.animationDuration = (5 + Math.random() * 5) + 's';
+      stars.appendChild(star);
+    }
+
+    for (let i = 0; i < 30; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.top = Math.random() * 100 + 'vh';
+      heart.style.animationDuration = (8 + Math.random() * 5) + 's';
+      hearts.appendChild(heart);
+    }
+  </script>
+</body>
+</html>
